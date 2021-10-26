@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title></title>
         <link>undefined</link>
         <description>undefined</description>
-        <lastBuildDate>Tue, 26 Oct 2021 02:58:47 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 26 Oct 2021 03:04:08 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Joplin Pages Publisher</generator>
+        <item>
+            <title><![CDATA[welcome.md]]></title>
+            <guid>95af185f2f3a4884b652a0f1cc16a7e8</guid>
+            <pubDate>Tue, 26 Oct 2021 03:01:10 GMT</pubDate>
+            <content:encoded><![CDATA[### Hello World]]></content:encoded>
+        </item>
     </channel>
 </rss>
