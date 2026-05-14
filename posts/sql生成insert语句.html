@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sql生成insert语句 - pigchen</title>
+    <meta name="description" content="sql生成insert语句">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif; max-width: 800px; margin: 0 auto; padding: 30px 20px; line-height: 1.8; color: #1a1a1a; background: #fafafa; }
+        header { margin-bottom: 25px; border-bottom: 2px solid #ddd; padding-bottom: 15px; }
+        h1 { font-size: 26px; color: #111; margin-bottom: 8px; }
+        .back { color: #1a56db; font-size: 14px; text-decoration: none; }
+        .back:hover { text-decoration: underline; }
+        .date { color: #555; font-size: 14px; }
+        article { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); min-height: 60vh; }
+        article img { max-width: 100%; height: auto; border-radius: 4px; margin: 10px 0; }
+        article h2 { font-size: 20px; color: #222; margin: 20px 0 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        article h3 { font-size: 17px; color: #333; margin: 15px 0 8px; }
+        article p { margin: 10px 0; }
+        article a { color: #1a56db; }
+        article pre { background: #1e293b; color: #e2e8f0; padding: 16px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.5; margin: 12px 0; }
+        article code { background: #f1f5f9; color: #0f172a; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+        article pre code { background: none; color: inherit; padding: 0; }
+        article table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+        article th, article td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        article th { background: #f8fafc; font-weight: 600; }
+        article ul, article ol { margin: 10px 0; padding-left: 24px; }
+        article li { margin: 4px 0; }
+        footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; }
+        .footer-link { color: #555; font-size: 13px; text-decoration: none; }
+        .footer-link:hover { color: #1a56db; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="back">&larr; 返回首页</a>
+        <h1>sql生成insert语句</h1>
+        <p class="date">2026-05-14</p>
+    </header>
+    <nav aria-label="文章内容" role="main">
+    <article>
+<h4>达梦</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- 达梦</span>
+<span class="k">SELECT</span>
+<span class="s1">&#39;INSERT INTO &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">TABLE_NAME</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; (&#39;</span><span class="w"> </span><span class="o">||</span>
+<span class="n">LISTAGG</span><span class="p">(</span><span class="k">COLUMN_NAME</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;, &#39;</span><span class="p">)</span><span class="w"> </span><span class="n">WITHIN</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="p">(</span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">COLUMN_ID</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;) &#39;</span><span class="w"> </span><span class="o">||</span>
+<span class="s1">&#39;VALUES (&#39;</span><span class="w"> </span><span class="o">||</span>
+<span class="n">LISTAGG</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">REPLACE</span><span class="p">(</span><span class="n">INITCAP</span><span class="p">(</span><span class="k">REPLACE</span><span class="p">(</span><span class="k">LOWER</span><span class="p">(</span><span class="k">COLUMN_NAME</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">)),</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+<span class="n">WITHIN</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="p">(</span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">COLUMN_ID</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;);&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">insert_sql</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">USER_TAB_COLUMNS</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">TABLE_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;your_table_name&#39;</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">TABLE_NAME</span><span class="p">;</span>
+</code></pre></div>
+    </article>
+    </nav>
+    <footer>
+        <a href="/" class="footer-link">pigchen.github.io</a>
+    </footer>
+</body>
+</html>
