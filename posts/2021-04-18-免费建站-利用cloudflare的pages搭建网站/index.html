@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>免费建站：利用Cloudflare的Pages搭建网站 - pigchen</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.8; color: #333; }
+        h1 { border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        img { max-width: 100%; height: auto; }
+        pre { background: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; }
+        pre code { background: none; padding: 0; }
+        a { color: #007bff; }
+        .back { margin-top: 30px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>免费建站：利用Cloudflare的Pages搭建网站</h1>
+    <p style="color:#888;">2021-04-18</p>
+    <p><a href="https://www.cloudflare.com/">Cloudflare</a>推出了免费的<a href="https://pages.cloudflare.com/">Pages</a>(网页)服务，类似于<a href="https://github.com/">Github</a>的<a href="https://pages.github.com/">Github  Pages</a> ，并提供pages.dev的二级域名，可以利用此服务部署动态前端应用程序。</p>
+<p><img alt="" src="/images/image.md_-1.png" /></p>
+<p>官方给出的示例:</p>
+<p>[caption id="" align="alignnone" width="500"]<img alt="" src="/images/imageb6d8cf8d119c5b46.md_.png" /> 搭建很简单，需要准备：[/caption]</p>
+<div class="codehilite"><pre><span></span><code>- Cloudflare账号
+
+- Github账号、仓库
+</code></pre></div>
+
+<p>一个简单地示例：</p>
+<h4>1.注册Cloudflare，注册过程很简单，不再展开讲；</h4>
+<h4>2.注册Github,并创建一个代码仓库（Repositories），仓库里的内容可以是自己的代码，也可以使用<a href="https://hexo.io/">Hexo</a>等程序；</h4>
+<h4>3. 在Cloudflare pages中关联Github 仓库：</h4>
+<p><img alt="" src="/images/imagee7fa952badcb893a.md_.png" /></p>
+<p>选择准备好的仓库，点击开始设置，</p>
+<p><img alt="" src="/images/image2eb929aa4fe6d45b.md_.png" /></p>
+<p><img alt="" src="/images/imagea513811662f5bab6.md_.png" /></p>
+<p>项目名称就是二级域名的名称，例如项目名称为example，则二级域名为：example.pages.dev 。</p>
+<p>如果项目名称重复，则cloudflare会增加唯一标识，所以提前想好一个项目名称。</p>
+<p>构建命令根据框架预设提供了示例。</p>
+<p>点击保存并部署。</p>
+<p>根据代码不同，构建的时间也不同，等待部署成功后，即可访问。</p>
+<p>更多内容可以查看官方文档：<a href="https://developers.cloudflare.com/pages/">https://developers.cloudflare.com/pages/</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+    <div class="back"><a href="/">← 返回首页</a></div>
+</body>
+</html>

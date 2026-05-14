@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyVM 挂载Block Storage的方法 - pigchen</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.8; color: #333; }
+        h1 { border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        img { max-width: 100%; height: auto; }
+        pre { background: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; }
+        pre code { background: none; padding: 0; }
+        a { color: #007bff; }
+        .back { margin-top: 30px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>BuyVM 挂载Block Storage的方法</h1>
+    <p style="color:#888;">2020-11-10</p>
+    <p>&emsp;购买完buyVm的vps和Block Storage存储块后需要手动将Block Storage挂载到vps上</p>
+<h4>1. 列出存储块的名称</h4>
+<p>ls /dev/disk/by-id/
+<a href="https://img.950527.xyz/image/NRc"><img alt="" src="/images/17bdea523cd510ea26f1eb287f0deab9.png" /></a></p>
+<p><em>scsi-0BUYVM_SLAB_VOLUME-2761</em> 就是要挂载的存储块名称。</p>
+<h4>2. 格式化存储块</h4>
+<p>mkfs.ext4 -F /dev/disk/by-id/scsi-0BUYVM_SLAB_VOLUME-2761 
+<a href="https://img.950527.xyz/image/b9s"><img alt="" src="/images/51897ff5d284b1f6fda5cf585eaef191.md_.png" /></a></p>
+<h4>3. 创建挂载文件夹</h4>
+<p>mkdir -p /mnt/pan</p>
+<h4>4. 挂载</h4>
+<div class="codehilite"><pre><span></span><code>mount -o discard,defaults /dev/disk/by-id/scsi-0BUYVM_SLAB_VOLUME-2761 /mnt/pan
+</code></pre></div>
+
+<h4>5. 查看挂载情况</h4>
+<div class="codehilite"><pre><span></span><code>df -h
+</code></pre></div>
+
+<p><img alt="" src="https://img02.sogoucdn.com/app/a/100520146/FCFEEFAE352E49BF38E4AA93DD09C3DF" /></p>
+<h4>6. 开机启动</h4>
+<p>echo '/dev/disk/by-id/scsi-0BUYVM_SLAB_VOLUME-2761 /mnt/pan ext4 defaults,nofail,discard 0 0' | sudo tee -a /etc/fstab
+每个人的存储块名称都不一样，大部分是<em>scsi-0BUYVM_SLAB_VOLUME-</em> + 四位数字的形式。</p>
+<p>如果执行完<code>ls /dev/disk/by-id/</code> 没有查询到存储块，可以去buyvm官网后台管理系统里挂载到vps上，如果挂载了还没有，就只能发工单了。</p>
+    <div class="back"><a href="/">← 返回首页</a></div>
+</body>
+</html>

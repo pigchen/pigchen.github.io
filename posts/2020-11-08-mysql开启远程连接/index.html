@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYSQL开启远程连接 - pigchen</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.8; color: #333; }
+        h1 { border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        img { max-width: 100%; height: auto; }
+        pre { background: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; }
+        pre code { background: none; padding: 0; }
+        a { color: #007bff; }
+        .back { margin-top: 30px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>MYSQL开启远程连接</h1>
+    <p style="color:#888;">2020-11-08</p>
+    <h3>1.登录mysql数据库</h3>
+<p>mysql -u root -p</p>
+<h3>2.查看user表</h3>
+<p>切换至mysql。</p>
+<p>use mysql;
+查询user表，可以看到账户、主机、密码。</p>
+<p>select host,user,password from user;
+<a href="https://img.950527.xyz/image/UJX"><img alt="" src="/images/286ecea6ef21d4eff78b8ce5b4163311.md_.jpg" /></a>
+其中主机显示的是ip地址或者主机名称，意思是限制登录的ip或者主机。“ % ” 意味着可以允许所有地址进行远程访问。也就是说，将主机地址字段设置为“ % ”或者自己的主机ip即可远程访问。</p>
+<h3>3.执行语句</h3>
+<p>update user set host = &#039;%&#039; where user = &#039;root&#039;;
+或者</p>
+<p>grant all privileges  on <em>.</em> to root@&#039;%&#039; identified by &quot;password&quot;;
+root是mysql的用户，passowrd是你自定义的密码</p>
+<p>最后flush 一下</p>
+<p>flush privileges;
+就可以远程访问了。</p>
+    <div class="back"><a href="/">← 返回首页</a></div>
+</body>
+</html>

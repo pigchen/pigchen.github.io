@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>java.text.MessageFormat 对较大整数类型的格式化问题 - pigchen</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.8; color: #333; }
+        h1 { border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        img { max-width: 100%; height: auto; }
+        pre { background: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; }
+        pre code { background: none; padding: 0; }
+        a { color: #007bff; }
+        .back { margin-top: 30px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>java.text.MessageFormat 对较大整数类型的格式化问题</h1>
+    <p style="color:#888;">2024-09-29</p>
+    <p>MessageFormat 的参数是数字类型时，当数字超过 3 位数字以上时，每隔 3 位会多增加一个的逗号。</p>
+<h4>解决办法</h4>
+<p>1.第一种方法是将数字转为字符串，然后再进行格式化</p>
+<div class="codehilite"><pre><span></span><code> MessageFormat.format(&quot;{0}&quot;, String.valueOf(IntSomething));
+</code></pre></div>
+
+<ol>
+<li>第二种方法是增加 MessageFormat 的 FormatStyle</li>
+</ol>
+<div class="codehilite"><pre><span></span><code>MessageFormat.format(&quot; {0, number, #}&quot;, IntSomething);
+</code></pre></div>
+    <div class="back"><a href="/">← 返回首页</a></div>
+</body>
+</html>
