@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML中&解析转义问题 - pigchen</title>
+    <meta name="description" content="XML中&解析转义问题">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif; max-width: 800px; margin: 0 auto; padding: 30px 20px; line-height: 1.8; color: #1a1a1a; background: #fafafa; }
+        header { margin-bottom: 25px; border-bottom: 2px solid #ddd; padding-bottom: 15px; }
+        h1 { font-size: 26px; color: #111; margin-bottom: 8px; }
+        .back { color: #1a56db; font-size: 14px; text-decoration: none; }
+        .back:hover { text-decoration: underline; }
+        .date { color: #555; font-size: 14px; }
+        article { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); min-height: 60vh; }
+        article img { max-width: 100%; height: auto; border-radius: 4px; margin: 10px 0; }
+        article h2 { font-size: 20px; color: #222; margin: 20px 0 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        article h3 { font-size: 17px; color: #333; margin: 15px 0 8px; }
+        article p { margin: 10px 0; }
+        article a { color: #1a56db; }
+        article pre { background: #1e293b; color: #e2e8f0; padding: 16px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.5; margin: 12px 0; }
+        article code { background: #f1f5f9; color: #0f172a; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+        article pre code { background: none; color: inherit; padding: 0; }
+        article table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+        article th, article td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        article th { background: #f8fafc; font-weight: 600; }
+        article ul, article ol { margin: 10px 0; padding-left: 24px; }
+        article li { margin: 4px 0; }
+        footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; }
+        .footer-link { color: #555; font-size: 13px; text-decoration: none; }
+        .footer-link:hover { color: #1a56db; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="back">&larr; 返回首页</a>
+        <h1>XML中&解析转义问题</h1>
+        <p class="date"></p>
+    </header>
+    <nav aria-label="文章内容" role="main">
+    <article>
+<p style="color:#888;">2020-11-21</p>
+    <p>将参数传入XML模板文件，然后转WORD 报错，WORD无法打开。</p>
+<p>当传入XML中的参数中存在"&lt;" ， "&amp;"等字符却没有转义时，可能会存在异常情况。</p>
+<p>XML 文档中的所有文本均会被解析器解析。只有 CDATA 区段中的文本会被解析器忽略。</p>
+<p>术语 CDATA 是不应该由 XML 解析器解析的文本数据。</p>
+<p>像 "&lt;" 和 "&amp;" 字符在 XML 元素中都是非法的。</p>
+<p>"&lt;" 会产生错误，因为解析器会把该字符解释为新元素的开始。</p>
+<p>"&amp;" 会产生错误，因为解析器会把该字符解释为字符实体的开始。</p>
+<p>某些文本，比如 JavaScript 代码，包含大量 "&lt;" 或 "&amp;" 字符。为了避免错误，可以将脚本代码定义为 CDATA。</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&amp;</span><span class="nv">lt</span><span class="c1">;script&amp;gt;</span>
+<span class="o">&amp;</span><span class="nv">lt</span><span class="c1">;![CDATA[</span>
+<span class="nv">function</span><span class="w"> </span><span class="nv">matchwo</span><span class="ss">(</span><span class="nv">a</span>,<span class="nv">b</span><span class="ss">)</span>{
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ss">(</span><span class="nv">a</span><span class="w"> </span><span class="o">&amp;</span><span class="nv">lt</span><span class="c1">; b &amp;amp;&amp;amp; a &amp;lt; 0) then</span>
+<span class="w">    </span>{
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="c1">;</span>
+<span class="w">    </span>}
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span>{
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="c1">;</span>
+<span class="w">    </span>}
+}
+]]<span class="o">&amp;</span><span class="nv">gt</span><span class="c1">;</span>
+<span class="o">&amp;</span><span class="nv">lt</span><span class="c1">;/script&amp;gt;</span>
+</code></pre></div>
+
+<p>在上面的实例中，解析器会忽略 CDATA 部分中的所有内容。</p>
+<p>实体名称
+显示结果
+描述</p>
+<p>&amp;lt;
+&lt;
+小于号</p>
+<p>&amp;gt;
+&gt;
+大于号</p>
+<p>&amp;amp
+&amp;
+和</p>
+<p>&amp;apos;
+'
+单引号</p>
+<p>&amp;quot;
+"
+双引号</p>
+    </article>
+    </nav>
+    <footer>
+        <a href="/" class="footer-link">pigchen.github.io</a>
+    </footer>
+</body>
+</html>

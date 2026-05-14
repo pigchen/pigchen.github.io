@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mysql数据库查询带有某个字段的所有表名 - pigchen</title>
+    <meta name="description" content="mysql数据库查询带有某个字段的所有表名">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif; max-width: 800px; margin: 0 auto; padding: 30px 20px; line-height: 1.8; color: #1a1a1a; background: #fafafa; }
+        header { margin-bottom: 25px; border-bottom: 2px solid #ddd; padding-bottom: 15px; }
+        h1 { font-size: 26px; color: #111; margin-bottom: 8px; }
+        .back { color: #1a56db; font-size: 14px; text-decoration: none; }
+        .back:hover { text-decoration: underline; }
+        .date { color: #555; font-size: 14px; }
+        article { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); min-height: 60vh; }
+        article img { max-width: 100%; height: auto; border-radius: 4px; margin: 10px 0; }
+        article h2 { font-size: 20px; color: #222; margin: 20px 0 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        article h3 { font-size: 17px; color: #333; margin: 15px 0 8px; }
+        article p { margin: 10px 0; }
+        article a { color: #1a56db; }
+        article pre { background: #1e293b; color: #e2e8f0; padding: 16px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.5; margin: 12px 0; }
+        article code { background: #f1f5f9; color: #0f172a; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+        article pre code { background: none; color: inherit; padding: 0; }
+        article table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+        article th, article td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        article th { background: #f8fafc; font-weight: 600; }
+        article ul, article ol { margin: 10px 0; padding-left: 24px; }
+        article li { margin: 4px 0; }
+        footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; }
+        .footer-link { color: #555; font-size: 13px; text-decoration: none; }
+        .footer-link:hover { color: #1a56db; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="back">&larr; 返回首页</a>
+        <h1>mysql数据库查询带有某个字段的所有表名</h1>
+        <p class="date"></p>
+    </header>
+    <nav aria-label="文章内容" role="main">
+    <article>
+<p style="color:#888;">2021-11-16</p>
+    <p>mysql数据库查询带有某个字段的所有表名</p>
+<p>SELECT TABLE_NAME,COLUMN_COMMENT FROM information_schema.columns WHERE COLUMN_NAME='COLUMN_NAME' AND TABLE_SCHEMA = "database";</p>
+<p>COLUMN_NAME：需要查询的字段
+database：查询的数据库</p>
+    </article>
+    </nav>
+    <footer>
+        <a href="/" class="footer-link">pigchen.github.io</a>
+    </footer>
+</body>
+</html>

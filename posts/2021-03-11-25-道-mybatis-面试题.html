@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25 道 MyBatis 面试题 - pigchen</title>
+    <meta name="description" content="25 道 MyBatis 面试题">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif; max-width: 800px; margin: 0 auto; padding: 30px 20px; line-height: 1.8; color: #1a1a1a; background: #fafafa; }
+        header { margin-bottom: 25px; border-bottom: 2px solid #ddd; padding-bottom: 15px; }
+        h1 { font-size: 26px; color: #111; margin-bottom: 8px; }
+        .back { color: #1a56db; font-size: 14px; text-decoration: none; }
+        .back:hover { text-decoration: underline; }
+        .date { color: #555; font-size: 14px; }
+        article { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); min-height: 60vh; }
+        article img { max-width: 100%; height: auto; border-radius: 4px; margin: 10px 0; }
+        article h2 { font-size: 20px; color: #222; margin: 20px 0 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        article h3 { font-size: 17px; color: #333; margin: 15px 0 8px; }
+        article p { margin: 10px 0; }
+        article a { color: #1a56db; }
+        article pre { background: #1e293b; color: #e2e8f0; padding: 16px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.5; margin: 12px 0; }
+        article code { background: #f1f5f9; color: #0f172a; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+        article pre code { background: none; color: inherit; padding: 0; }
+        article table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+        article th, article td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        article th { background: #f8fafc; font-weight: 600; }
+        article ul, article ol { margin: 10px 0; padding-left: 24px; }
+        article li { margin: 4px 0; }
+        footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; }
+        .footer-link { color: #555; font-size: 13px; text-decoration: none; }
+        .footer-link:hover { color: #1a56db; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="back">&larr; 返回首页</a>
+        <h1>25 道 MyBatis 面试题</h1>
+        <p class="date"></p>
+    </header>
+    <nav aria-label="文章内容" role="main">
+    <article>
+<p style="color:#888;">2021-03-11</p>
+    <p>25 道 MyBatis 面试题</p>
+<div class="codehilite"><pre><span></span><code>-<span class="w"> </span>**[什么是<span class="w"> </span>Mybatis？<span class="w">  </span>](#a)**
+
+-<span class="w"> </span>**[MyBatis<span class="w"> </span>的优点](#b)**
+
+-<span class="w"> </span>**[MyBatis<span class="w"> </span>框架的缺点](#c)**
+
+-<span class="w"> </span>**[MyBatis<span class="w"> </span>框架适用场合](#d)**
+
+-<span class="w"> </span>**[MyBatis<span class="w"> </span>与<span class="w"> </span>Hibernate<span class="w"> </span>有哪些不同？](#e)**
+
+-<span class="w"> </span>**[#{}和${}的区别是什么？](#f)**
+
+-<span class="w"> </span>**[当实体类中的属性名和表中的字段名不一样<span class="w"> </span>，怎么办<span class="w"> </span>？](#h)**
+
+-<span class="w"> </span>**[模糊查询<span class="w"> </span>like<span class="w"> </span>语句该怎么写?](#j)**
+
+-<span class="w"> </span>**[Mapper<span class="w"> </span>接口的工作原理是什么？Mapper<span class="w"> </span>接口里的方法，参数不同时，方法能重载吗？](#k)**
+
+-<span class="w"> </span>**[Mybatis<span class="w"> </span>是如何进行分页的？分页插件的原理是什么？](#l)**
+
+-<span class="w"> </span>**[Mybatis是如何将sql执行结果封装为目标对象并返回的？都有哪些映射形式？](#m)**
+
+-<span class="w"> </span>**[如何执行批量插入?](#n)**
+
+-<span class="w"> </span>**[如何获取自动生成的(主)键值?](#o)**
+
+-<span class="w"> </span>**[[在<span class="w"> </span>mapper<span class="w"> </span>中如何传递多个参数?](#p)**
+
+-<span class="w"> </span>**[Mybatis<span class="w"> </span>动态<span class="w"> </span>sql<span class="w"> </span>有什么用？执行原理？有哪些动态<span class="w"> </span>sql？](#q)**
+
+-<span class="w"> </span>**[Xml<span class="w"> </span>映射文件中，除了常见的<span class="w"> </span>select|insert|updae|delete<span class="w"> </span>标签之外，还有哪些标签？](#r)**
+
+-<span class="w"> </span>**[Mybatis<span class="w"> </span>的<span class="w"> </span>Xml<span class="w"> </span>映射文件中，不同的<span class="w"> </span>Xml<span class="w"> </span>映射文件，id<span class="w"> </span>是否可以重复？](#s)**
+
+-<span class="w"> </span>**[为什么说<span class="w"> </span>Mybatis<span class="w"> </span>是半自动<span class="w"> </span>ORM<span class="w"> </span>映射工具？它与全自动的区别在哪里？](#t)**
+
+-<span class="w"> </span>**[一对一、一对多的关联查询<span class="w"> </span>？](#u)**
+
+-<span class="w"> </span>**[MyBatis<span class="w"> </span>实现一对一有几种方式?具体怎么操作的？](#v)**
+
+-<span class="w"> </span>**[Mybatis<span class="w"> </span>是否支持延迟加载？如果支持，它的实现原理是什么？](#w)**
+
+-<span class="w"> </span>**[Mybatis<span class="w"> </span>的一级、二级缓存](#x)**
+
+-<span class="w"> </span>**[什么是<span class="w"> </span>MyBatis<span class="w"> </span>的接口绑定？有哪些实现方式？](#y)**
+
+-<span class="w"> </span>**[使用<span class="w"> </span>MyBatis<span class="w"> </span>的<span class="w"> </span>mapper<span class="w"> </span>接口调用时有哪些要求？](#z)**
+
+-<span class="w"> </span>**[简述<span class="w"> </span>Mybatis<span class="w"> </span>的插件运行原理，以及如何编写一个插件](#g)**
+</code></pre></div>
+
+<h2>什么是 Mybatis？</h2>
+<div class="codehilite"><pre><span></span><code>- Mybatis 是一个半 ORM（对象关系映射）框架，它内部封装了 JDBC，开发时 只需要关注 SQL 语句本身，不需要花费精力去处理加载驱动、创建连接、创建 statement 等繁杂的过程。程序员直接编写原生态 sql，可以严格控制 sql 执行性 能，灵活度高。
+
+- MyBatis 可以使用 XML 或注解来配置和映射原生信息，将 POJO 映射成数 据库中的记录，避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。
+
+- 通过 xml 文件或注解的方式将要执行的各种 statement 配置起来，并通过 java 对象和 statement 中 sql 的动态参数进行映射生成最终执行的 sql 语句，最 后由 mybatis 框架执行 sql 并将结果映射为 java 对象并返回。（从执行 sql 到返 回 result 的过程）。
+</code></pre></div>
+
+<h2>MyBatis 的优点</h2>
+<div class="codehilite"><pre><span></span><code>- 基于 SQL 语句编程，相当灵活，不会对应用程序或者数据库的现有设计造成任 何影响，SQL 写在 XML 里，解除 sql 与程序代码的耦合，便于统一管理；提供 XML 标签，支持编写动态 SQL 语句，并可重用。
+
+- 与 JDBC 相比，减少了 50%以上的代码量，消除了 JDBC 大量冗余的代码，不 需要手动开关连接；
+
+- 很好的与各种数据库兼容（因为 MyBatis 使用 JDBC 来连接数据库，所以只要 JDBC 支持的数据库 MyBatis 都支持）。
+
+- 能够与 Spring 很好的集成；
+
+- 提供映射标签，支持对象与数据库的 ORM 字段关系映射；提供对象关系映射 标签，支持对象关系组件维护。
+</code></pre></div>
+
+<h2>MyBatis 框架的缺点</h2>
+<div class="codehilite"><pre><span></span><code>- SQL 语句的编写工作量较大，尤其当字段多、关联表多时，对开发人员编写 SQL 语句的功底有一定要求。
+
+- SQL 语句依赖于数据库，导致数据库移植性差，不能随意更换数据库。
+</code></pre></div>
+
+<h2>MyBatis 框架适用场合</h2>
+<div class="codehilite"><pre><span></span><code>- MyBatis 专注于 SQL 本身，是一个足够灵活的 DAO 层解决方案。
+
+- 对性能的要求很高，或者需求变化较多的项目，如互联网项目，MyBatis 将是 不错的选择
+</code></pre></div>
+
+<h2>MyBatis 与 Hibernate 有哪些不同？</h2>
+<div class="codehilite"><pre><span></span><code>- Mybatis 和 hibernate 不同，它不完全是一个 ORM 框架，因为 MyBatis 需要 程序员自己编写 Sql 语句
+
+- Mybatis 直接编写原生态 sql，可以严格控制 sql 执行性能，灵活度高，非常 适合对关系数据模型要求不高的软件开发，因为这类软件需求变化频繁，一但需 求变化要求迅速输出成果。但是灵活的前提是 mybatis 无法做到数据库无关性， 如果需要实现支持多种数据库的软件，则需要自定义多套 sql 映射文件，工作量大。
+
+- Hibernate 对象/关系映射能力强，数据库无关性好，对于关系模型要求高的 软件，如果用 hibernate 开发可以节省很多代码，提高效率。
+</code></pre></div>
+
+<h2>#{}和${}的区别是什么？</h2>
+<div class="codehilite"><pre><span></span><code>-<span class="w"> </span>`#{}`是预编译处理，`<span class="cp">${</span><span class="p">}</span><span class="err">`</span><span class="n">是字符串替换</span><span class="err">。</span>
+
+<span class="o">-</span> <span class="n">Mybatis</span> <span class="n">在处理</span><span class="c1">#{</span><span class="cp">}</span>时，会将<span class="w"> </span>sql<span class="w"> </span>中的#{}替换为?号，调用<span class="w"> </span>PreparedStatement<span class="w"> </span>的<span class="w"> </span>set<span class="w"> </span>方法来赋值；
+
+-<span class="w"> </span>`Mybatis<span class="w"> </span>在处理`{}时，就是把<span class="cp">${</span><span class="p">}</span><span class="n">替换成变量的值</span><span class="err">。</span>
+
+<span class="o">-</span> <span class="n">使用</span><span class="c1">#{</span><span class="cp">}</span>可以有效的防止<span class="w"> </span>SQL<span class="w"> </span>注入，提高系统安全性。
+</code></pre></div>
+
+<h2>当实体类中的属性名和表中的字段名不一样 ，怎么办 ？</h2>
+<p>第 1 种：通过在查询的 sql 语句中定义字段名的别名，让字段名的别名和实体类 的属性名一致</p>
+<div class="codehilite"><pre><span></span><code>&amp;lt;select id=”selectorder” parametertype=”int” resultetype=”me.gacl.domain.order”&amp;gt;
+        select order_id id, order_no orderno ,order_price price form
+        orders where order_id=#{id};
+        &amp;lt;/select&amp;gt;
+</code></pre></div>
+
+<p>第 2 种：通过来映射字段名和实体类属性名的一一对应的关系。</p>
+<div class="codehilite"><pre><span></span><code>&amp;lt;select id=&quot;getOrder&quot; parameterType=&quot;int&quot;  resultMap=&quot;orderresultmap&quot;&amp;gt;
+    select * from orders where order_id=#{id}
+&amp;lt;/select&amp;gt;
+
+&amp;lt;resultMap type=”me.gacl.domain.order” id=”orderresultmap”&amp;gt;
+&amp;lt;!–用 id 属性来映射主键字段–&amp;gt;
+&amp;lt;id property=”id” column=”order_id”&amp;gt;
+&amp;lt;!–用 result 属性来映射非主键字段，property 为实体类属性名，column
+        为数据表中的属性–&amp;gt;
+&amp;lt;result property = “orderno” column =”order_no”/&amp;gt;
+&amp;lt;result property=”price” column=”order_price” /&amp;gt;
+        &amp;lt;/reslutMap&amp;gt;
+</code></pre></div>
+
+<h2>模糊查询 like 语句该怎么写?</h2>
+<p>第 1 种：在 Java 代码中添加 sql 通配符。</p>
+<div class="codehilite"><pre><span></span><code>string wildcardname = “%smi%”;
+        list&amp;lt;name&amp;gt; names = mapper.selectlike(wildcardname);
+
+    &amp;lt;select id=”selectlike”&amp;gt;
+    select * from foo where bar like #{value}
+&amp;lt;/select&amp;gt;
+</code></pre></div>
+
+<p>第 2 种：在 sql 语句中拼接通配符，会引起 sql 注入</p>
+<div class="codehilite"><pre><span></span><code>string wildcardname = “smi”;
+        list&amp;lt;name&amp;gt; names = mapper.selectlike(wildcardname);
+
+    &amp;lt;select id=”selectlike”&amp;gt;
+    select * from foo where bar like &quot;%&quot;#{value}&quot;%&quot;
+&amp;lt;/select&amp;gt;
+</code></pre></div>
+
+<h2>Mapper 接口的工作原理是什么？Mapper 接口里的方法，参数不同时，方法能重载吗？</h2>
+<p>Dao 接口即 Mapper 接口。接口的全限名，就是映射文件中的 namespace 的值；接口的方法名，就是映射文件中 Mapper 的 Statement 的 id 值；接口方法内的参数，就是传递给 sql 的参数。</p>
+<p>Mapper 接口是没有实现类的，当调用接口方法时，接口全限名+方法名拼接字符串作为 key 值，可唯一定位一个 MapperStatement。在 Mybatis 中，每一个 <code>&amp;lt;select&amp;gt;</code>、<code>&amp;lt;insert&amp;gt;</code>、<code>&amp;lt;update&amp;gt;</code>、<code>&amp;lt;delete&amp;gt;</code>标签，都会被解析为一个MapperStatement 对象。</p>
+<p>举例：com.mybatis3.mappers.StudentDao.findStudentById，可以唯一找到 namespace 为com.mybatis3.mappers.StudentDao 下面 id 为findStudentById 的 MapperStatement。</p>
+<p>Mapper 接口里的方法，是不能重载的，因为是使用 全限名+方法名 的保存和寻找策略。Mapper 接口的工作原理是 JDK 动态代理，Mybatis 运行时会使用 JDK动态代理为 Mapper 接口生成代理对象 proxy，代理对象会拦截接口方法，转而执行 MapperStatement 所代表的 sql，然后将 sql 执行结果返回。</p>
+<h2>Mybatis 是如何进行分页的？分页插件的原理是什么？</h2>
+<p>Mybatis 使用 RowBounds 对象进行分页，它是针对 ResultSet 结果集执行的内存分页，而非物理分页。可以在 sql 内直接书写带有物理分页的参数来完成物理分页功能，也可以使用分页插件来完成物理分页。</p>
+<p>分页插件的基本原理是使用 Mybatis 提供的插件接口，实现自定义插件，在插件的拦截方法内拦截待执行的 sql，然后重写 sql，根据 dialect 方言，添加对应的物理分页语句和物理分页参数。</p>
+<h2>Mybatis是如何将sql执行结果封装为目标对象并返回的？都有哪些映射形式？</h2>
+<p>第一种是使用标签，逐一定义数据库列名和对象属性名之间的映射关系。</p>
+<p>第二种是使用 sql 列的别名功能，将列的别名书写为对象属性名。</p>
+<p>有了列名与属性名的映射关系后，Mybatis 通过反射创建对象，同时使用反射给对象的属性逐一赋值并返回，那些找不到映射关系的属性，是无法完成赋值的。</p>
+<h2>如何执行批量插入?</h2>
+<p>首先,创建一个简单的 insert 语句:</p>
+<div class="codehilite"><pre><span></span><code>&amp;lt;insert id=”insertname”&amp;gt;
+    insert into names (name) values (#{value})
+&amp;lt;/insert&amp;gt;
+</code></pre></div>
+
+<p>然后在 java 代码中像下面这样执行批处理插入:</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">list</span><span class="w"> </span><span class="o">&amp;</span><span class="nt">lt</span><span class="o">;</span><span class="w"> </span><span class="nt">string</span><span class="w"> </span><span class="o">&amp;</span><span class="nt">gt</span><span class="o">;</span><span class="w"> </span><span class="nt">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">new</span><span class="w"> </span><span class="nt">arraylist</span><span class="o">();</span>
+<span class="nt">names</span><span class="p">.</span><span class="nc">add</span><span class="o">(</span><span class="err">“</span><span class="nt">fred</span><span class="err">”</span><span class="o">);</span>
+<span class="nt">names</span><span class="p">.</span><span class="nc">add</span><span class="o">(</span><span class="err">“</span><span class="nt">barney</span><span class="err">”</span><span class="o">);</span>
+<span class="nt">names</span><span class="p">.</span><span class="nc">add</span><span class="o">(</span><span class="err">“</span><span class="nt">betty</span><span class="err">”</span><span class="o">);</span>
+<span class="nt">names</span><span class="p">.</span><span class="nc">add</span><span class="o">(</span><span class="err">“</span><span class="nt">wilma</span><span class="err">”</span><span class="o">);</span>
+<span class="o">//</span><span class="w"> </span><span class="nt">注意这里</span><span class="w"> </span><span class="nt">executortype</span><span class="p">.</span><span class="nc">batch</span>
+<span class="nt">sqlsession</span><span class="w"> </span><span class="nt">sqlsession</span><span class="w"> </span><span class="o">=</span>
+<span class="nt">sqlsessionfactory</span><span class="p">.</span><span class="nc">opensession</span><span class="o">(</span><span class="nt">executortype</span><span class="p">.</span><span class="nc">batch</span><span class="o">);</span>
+<span class="nt">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="err">namemapper</span><span class="w"> </span><span class="err">mapper</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">sqlsession.getmapper(namemapper.class)</span><span class="p">;</span>
+<span class="w">    </span><span class="err">for</span><span class="w"> </span><span class="err">(string</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">names</span><span class="p">)</span><span class="w"> </span><span class="err">{</span>
+<span class="w">        </span><span class="n">mapper</span><span class="o">.</span><span class="nf">insertname</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nt">sqlsession</span><span class="p">.</span><span class="nc">commit</span><span class="o">();</span>
+<span class="err">}</span><span class="w"> </span><span class="nt">catch</span><span class="w"> </span><span class="o">(</span><span class="nt">Exception</span><span class="w"> </span><span class="nt">e</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="err">e.printStackTrace()</span><span class="p">;</span>
+<span class="w">    </span><span class="err">sqlSession.rollback()</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="nt">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="err">sqlsession.close()</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2>如何获取自动生成的(主)键值?</h2>
+<p>insert 方法总是返回一个 int 值 ，这个值代表的是插入的行数。</p>
+<p>如果采用自增长策略，自动生成的键值在 insert 方法执行完后可以被设置到传入 的参数对象中。</p>
+<p>示例：</p>
+<div class="codehilite"><pre><span></span><code>&amp;lt;insert id=”insertname” usegeneratedkeys=”true” keyproperty=”id”&amp;gt;
+    insert into names (name) values (#{name})
+&amp;lt;/insert&amp;gt;
+
+name name = new name();
+name.setname(“fred”);
+int rows = mapper.insertname(name);
+// 完成后,id 已经被设置到对象中
+system.out.println(“rows inserted = ” + rows);
+system.out.println(“generated key value = ” + name.getid());
+</code></pre></div>
+
+<h2>在 mapper 中如何传递多个参数?</h2>
+<p>1、第一种：</p>
+<div class="codehilite"><pre><span></span><code>public UserselectUser(String name,String area);
+对应的 xml,#{0}代表接收的是 dao 层中的第一个参数，#{1}代表 dao 层中第二
+参数，更多参数一致往后加即可。
+
+&amp;lt;select id=&quot;selectUser&quot;resultMap=&quot;BaseResultMap&quot;&amp;gt;
+    select * fromuser_user_t
+    whereuser_name = #{0}
+    anduser_area=#{1}
+&amp;lt;/select&amp;gt;
+</code></pre></div>
+
+<p>2、第二种：使用 @param 注解:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="n">interface</span><span class="w"> </span><span class="n">usermapper</span><span class="w"> </span><span class="err">{</span>
+
+<span class="w">    </span><span class="k">user</span><span class="w"> </span><span class="n">selectuser</span><span class="p">(</span><span class="nv">@param</span><span class="p">(</span><span class="err">“</span><span class="n">username</span><span class="err">”</span><span class="p">)</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="nv">@param</span><span class="p">(</span><span class="err">“</span><span class="n">hashedpassword</span><span class="err">”</span><span class="p">)</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="n">hashedpassword</span><span class="p">);</span>
+
+<span class="err">}</span>
+</code></pre></div>
+
+<p>然后,就可以在 xml 像下面这样使用(推荐封装为一个 map,作为单个参数传递给mapper)</p>
+<div class="codehilite"><pre><span></span><code>&amp;lt;select id=”selectuser” resulttype=”user”&amp;gt;
+    select id, username, hashedpassword
+    from some_table
+    where username = #{username}
+    and hashedpassword = #{hashedpassword}
+&amp;lt;/select&amp;gt;
+</code></pre></div>
+
+<p>3、第三种：多个参数封装成 map</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">try</span><span class="w"> </span>{
+<span class="w">    </span><span class="o">//</span>映射文件的命名空间.<span class="nv">SQL</span><span class="w"> </span>片段的<span class="w"> </span><span class="nv">ID</span>，就可以调用对应的映射文件中的<span class="w"> </span><span class="nv">SQL</span>
+<span class="w">    </span><span class="o">//</span>由于我们的参数超过了两个，而方法中只有一个<span class="w"> </span><span class="nv">Object</span><span class="w"> </span>参数收集，因此
+<span class="w">    </span>我们使用<span class="w"> </span><span class="nv">Map</span><span class="w"> </span>集合来装载我们的参数
+<span class="w">    </span><span class="nv">Map</span><span class="w"> </span><span class="o">&amp;</span><span class="nv">lt</span><span class="c1">; String, Object &amp;gt; map = new HashMap();</span>
+<span class="w">    </span><span class="nv">map</span>.<span class="nv">put</span><span class="ss">(</span><span class="s2">&quot;start&quot;</span>,<span class="w"> </span><span class="nv">start</span><span class="ss">)</span><span class="c1">;</span>
+<span class="w">    </span><span class="nv">map</span>.<span class="nv">put</span><span class="ss">(</span><span class="s2">&quot;end&quot;</span>,<span class="w"> </span><span class="k">end</span><span class="ss">)</span><span class="c1">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nv">sqlSession</span>.<span class="nv">selectList</span><span class="ss">(</span><span class="s2">&quot;StudentID.pagination&quot;</span>,<span class="w"> </span><span class="nv">map</span><span class="ss">)</span><span class="c1">;</span>
+}<span class="w"> </span><span class="nv">catch</span><span class="w"> </span><span class="ss">(</span><span class="nv">Exception</span><span class="w"> </span><span class="nv">e</span><span class="ss">)</span><span class="w"> </span>{
+<span class="w">    </span><span class="nv">e</span>.<span class="nv">printStackTrace</span><span class="ss">()</span><span class="c1">;</span>
+<span class="w">    </span><span class="nv">sqlSession</span>.<span class="nv">rollback</span><span class="ss">()</span><span class="c1">;</span>
+<span class="w">    </span><span class="nv">throw</span><span class="w"> </span><span class="nv">e</span><span class="c1">;</span>
+}<span class="w"> </span><span class="nv">finally</span><span class="w"> </span>{
+<span class="w">    </span><span class="nv">MybatisUtil</span>.<span class="nv">closeSqlSession</span><span class="ss">()</span><span class="c1">;</span>
+}
+</code></pre></div>
+
+<h2>Mybatis 动态 sql 有什么用？执行原理？有哪些动态 sql？</h2>
+<p>Mybatis 动态 sql 可以在 Xml 映射文件内，以标签的形式编写动态 sql，执行原理 是根据表达式的值 完成逻辑判断并动态拼接 sql 的功能。</p>
+<p>Mybatis 提供了 9 种动态 sql 标签：trim | where | set | foreach | if | choose | when | otherwise | bind。</p>
+<h2>Xml 映射文件中，除了常见的 select|insert|updae|delete 标签之外，还有哪些标签？</h2>
+<p><code>&amp;lt;resultMap&amp;gt;</code>、<code>&amp;lt;parameterMap&amp;gt;</code>、<code>&amp;lt;sql&amp;gt;</code>、<code>&amp;lt;include&amp;gt;</code>、<code>&amp;lt;selectKey&amp;gt;</code>，加上动态 sql 的 9 个标签，其中为 sql 片段标签，通过标签引入 sql 片段，为不支持自增的主键生成策略标签。</p>
+<h2>Mybatis 的 Xml 映射文件中，不同的 Xml 映射文件，id 是否可以重复？</h2>
+<p>不同的 Xml 映射文件，如果配置了 namespace，那么 id 可以重复；如果没有配置 namespace，那么 id 不能重复；</p>
+<p>原因就是 namespace+id 是作为 Map的 key使用的，如果没有 namespace，就剩下 id，那么，id 重复会导致数据互相覆盖。有了 namespace，自然 id 就可以重复，namespace 不同，namespace+id 自然也就不同。</p>
+<h2>为什么说 Mybatis 是半自动 ORM 映射工具？它与全自动的区别在哪里？</h2>
+<p>Hibernate 属于全自动 ORM 映射工具，使用 Hibernate 查询关联对象或者关联集合对象时，可以根据对象关系模型直接获取，所以它是全自动的。而 Mybatis在查询关联对象或关联集合对象时，需要手动编写 sql 来完成，所以，称之为半自动 ORM 映射工具。</p>
+<h2>一对一、一对多的关联查询 ？</h2>
+<div class="codehilite"><pre><span></span><code>&amp;lt;mapper namespace=&quot;com.lcb.mapping.userMapper&quot;&amp;gt;
+    &amp;lt;!--association 一对一关联查询 --&amp;gt;
+    &amp;lt;select id=&quot;getClass&quot; parameterType=&quot;int&quot; resultMap=&quot;ClassesResultMap&quot;&amp;gt;
+        select * from class c,teacher t where c.teacher_id=t.t_id and
+        c.c_id=#{id}
+    &amp;lt;/select&amp;gt;
+
+    &amp;lt;resultMap type=&quot;com.lcb.user.Classes&quot; id=&quot;ClassesResultMap&quot;&amp;gt;
+        &amp;lt;!-- 实体类的字段名和数据表的字段名映射 --&amp;gt;
+        &amp;lt;id property=&quot;id&quot; column=&quot;c_id&quot;/&amp;gt;
+        &amp;lt;result property=&quot;name&quot; column=&quot;c_name&quot;/&amp;gt;
+        &amp;lt;association property=&quot;teacher&quot; javaType=&quot;com.lcb.user.Teacher&quot;&amp;gt;
+        &amp;lt;id property=&quot;id&quot; column=&quot;t_id&quot;/&amp;gt;
+        &amp;lt;result property=&quot;name&quot; column=&quot;t_name&quot;/&amp;gt;
+        &amp;lt;/association&amp;gt;
+    &amp;lt;/resultMap&amp;gt;
+    &amp;lt;!--collection 一对多关联查询 --&amp;gt;
+    &amp;lt;select id=&quot;getClass2&quot; parameterType=&quot;int&quot; resultMap=&quot;ClassesResultMap2&quot;&amp;gt;
+        select * from class c,teacher t,student s where c.teacher_id=t.t_id
+        and c.c_id=s.class_id and c.c_id=#{id}
+    &amp;lt;/select&amp;gt;
+    &amp;lt;resultMap type=&quot;com.lcb.user.Classes&quot; id=&quot;ClassesResultMap2&quot;&amp;gt;
+        &amp;lt;id property=&quot;id&quot; column=&quot;c_id&quot;/&amp;gt;
+        &amp;lt;result property=&quot;name&quot; column=&quot;c_name&quot;/&amp;gt;
+        &amp;lt;association property=&quot;teacher&quot; javaType=&quot;com.lcb.user.Teacher&quot;&amp;gt;
+        &amp;lt;id property=&quot;id&quot; column=&quot;t_id&quot;/&amp;gt;
+        &amp;lt;result property=&quot;name&quot; column=&quot;t_name&quot;/&amp;gt;
+    &amp;lt;/association&amp;gt;
+    &amp;lt;collection property=&quot;student&quot; ofType=&quot;com.lcb.user.Student&quot;&amp;gt;
+        &amp;lt;id property=&quot;id&quot; column=&quot;s_id&quot;/&amp;gt;
+        &amp;lt;result property=&quot;name&quot; column=&quot;s_name&quot;/&amp;gt;
+    &amp;lt;/collection&amp;gt;
+    &amp;lt;/resultMap&amp;gt;
+&amp;lt;/mapper&amp;gt;
+</code></pre></div>
+
+<h2>MyBatis 实现一对一有几种方式?具体怎么操作的？</h2>
+<p>有联合查询和嵌套查询,联合查询是几个表联合查询,只查询一次, 通过在resultMap 里面配置 association 节点配置一对一的类就可以完成；</p>
+<p>嵌套查询是先查一个表，根据这个表里面的结果的 外键 id，去再另外一个表里面查询数据,也是通过 association 配置，但另外一个表的查询通过 select 属性配置。</p>
+<h2>Mybatis 是否支持延迟加载？如果支持，它的实现原理是什么？</h2>
+<p>Mybatis 仅支持 association 关联对象和 collection 关联集合对象的延迟加 载，association 指的就是一对一，collection 指的就是一对多查询。在 Mybatis 配置文件中，可以配置是否启用延迟加载 lazyLoadingEnabled=true|false。</p>
+<p>它的原理是，使用 CGLIB 创建目标对象的代理对象，当调用目标方法时，进入拦截器方法，比如调用 a.getB().getName()，拦截器 invoke()方法发现 a.getB()是null 值，那么就会单独发送事先保存好的查询关联 B 对象的 sql，把 B 查询上来，然后调用 a.setB(b)，于是 a 的对象 b 属性就有值了，接着完成 a.getB().getName()方法的调用。这就是延迟加载的基本原理。</p>
+<p>当然了，不光是 Mybatis，几乎所有的包括 Hibernate，支持延迟加载的原理都是一样的。</p>
+<h2>Mybatis 的一级、二级缓存</h2>
+<p>1）一级缓存: 基于 PerpetualCache 的 HashMap 本地缓存，其存储作用域为 Session，当 Session flush 或 close 之后，该 Session 中的所有 Cache 就 将清空，默认打开一级缓存。</p>
+<p>2）二级缓存与一级缓存其机制相同，默认也是采用 PerpetualCache，HashMap存储，不同在于其存储作用域为 Mapper(Namespace)，并且可自定义存储源，如 Ehcache。默认不打开二级缓存，要开启二级缓存，使用二级缓存属性类需要实现 Serializable 序列化接口(可用来保存对象的状态),可在它的映射文件中配置；</p>
+<p>3）对于缓存数据更新机制，当某一个作用域(一级缓存 Session/二级缓存Namespaces)的进行了 C/U/D 操作后，默认该作用域下所有 select 中的缓存将被 clear。</p>
+<h2>什么是 MyBatis 的接口绑定？有哪些实现方式？</h2>
+<p>接口绑定，就是在 MyBatis 中任意定义接口,然后把接口里面的方法和 SQL 语句绑定, 我们直接调用接口方法就可以,这样比起原来了 SqlSession 提供的方法我们可以有更加灵活的选择和设置。</p>
+<p>接口绑定有两种实现方式,一种是通过注解绑定，就是在接口的方法上面加上@Select、@Update 等注解，里面包含 Sql 语句来绑定；另外一种就是通过 xml里面写 SQL 来绑定, 在这种情况下,要指定 xml 映射文件里面的 namespace 必须为接口的全路径名。当 Sql 语句比较简单时候,用注解绑定, 当 SQL 语句比较复杂时候,用 xml 绑定,一般用 xml 绑定的比较多。</p>
+<h2>使用 MyBatis 的 mapper 接口调用时有哪些要求？</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">- Mapper 接口方法名和 mapper.xml 中定义的每个 sql 的 id 相同；</span>
+
+<span class="n">- Mapper 接口方法的输入参数类型和 mapper.xml 中定义的每个 sql 的 parameterType 的类型相同；</span>
+
+<span class="n">- Mapper 接口方法的输出参数类型和 mapper.xml 中定义的每个 sql 的 resultType 的类型相同；</span>
+
+<span class="n">- Mapper.xml 文件中的 namespace 即是 mapper 接口的类路径。</span>
+</code></pre></div>
+
+<h2>简述 Mybatis 的插件运行原理，以及如何编写一个插件</h2>
+<p>答：Mybatis 仅可以编写针对 ParameterHandler、ResultSetHandler、StatementHandler、Executor 这 4 种接口的插件，Mybatis 使用 JDK 的动态代理，为需要拦截的接口生成代理对象以实现接口方法拦截功能，每当执行这 4 种接口对象的方法时，就会进入拦截方法，具体就是 InvocationHandler 的 invoke()方法，当然，只会拦截那些你指定需要拦截的方法。</p>
+<p>编写插件：实现 Mybatis 的 Interceptor 接口并复写 intercept()方法，然后在给插件编写注解，指定要拦截哪一个接口的哪些方法即可，记住，别忘了在配置文件中配置你编写的插件。</p>
+    </article>
+    </nav>
+    <footer>
+        <a href="/" class="footer-link">pigchen.github.io</a>
+    </footer>
+</body>
+</html>

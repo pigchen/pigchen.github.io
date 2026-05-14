@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>免费建站：利用Cloudflare的Pages搭建网站 - pigchen</title>
+    <meta name="description" content="免费建站：利用Cloudflare的Pages搭建网站">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif; max-width: 800px; margin: 0 auto; padding: 30px 20px; line-height: 1.8; color: #1a1a1a; background: #fafafa; }
+        header { margin-bottom: 25px; border-bottom: 2px solid #ddd; padding-bottom: 15px; }
+        h1 { font-size: 26px; color: #111; margin-bottom: 8px; }
+        .back { color: #1a56db; font-size: 14px; text-decoration: none; }
+        .back:hover { text-decoration: underline; }
+        .date { color: #555; font-size: 14px; }
+        article { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); min-height: 60vh; }
+        article img { max-width: 100%; height: auto; border-radius: 4px; margin: 10px 0; }
+        article h2 { font-size: 20px; color: #222; margin: 20px 0 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        article h3 { font-size: 17px; color: #333; margin: 15px 0 8px; }
+        article p { margin: 10px 0; }
+        article a { color: #1a56db; }
+        article pre { background: #1e293b; color: #e2e8f0; padding: 16px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.5; margin: 12px 0; }
+        article code { background: #f1f5f9; color: #0f172a; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+        article pre code { background: none; color: inherit; padding: 0; }
+        article table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+        article th, article td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        article th { background: #f8fafc; font-weight: 600; }
+        article ul, article ol { margin: 10px 0; padding-left: 24px; }
+        article li { margin: 4px 0; }
+        footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; }
+        .footer-link { color: #555; font-size: 13px; text-decoration: none; }
+        .footer-link:hover { color: #1a56db; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="back">&larr; 返回首页</a>
+        <h1>免费建站：利用Cloudflare的Pages搭建网站</h1>
+        <p class="date"></p>
+    </header>
+    <nav aria-label="文章内容" role="main">
+    <article>
+<p style="color:#888;">2021-04-18</p>
+    <p><a href="https://www.cloudflare.com/">Cloudflare</a>推出了免费的<a href="https://pages.cloudflare.com/">Pages</a>(网页)服务，类似于<a href="https://github.com/">Github</a>的<a href="https://pages.github.com/">Github  Pages</a> ，并提供pages.dev的二级域名，可以利用此服务部署动态前端应用程序。</p>
+<p><img alt="" src="/images/image.md_-1.png" /></p>
+<p>官方给出的示例:</p>
+<p>[caption id="" align="alignnone" width="500"]<img alt="" src="/images/imageb6d8cf8d119c5b46.md_.png" /> 搭建很简单，需要准备：[/caption]</p>
+<div class="codehilite"><pre><span></span><code>- Cloudflare账号
+
+- Github账号、仓库
+</code></pre></div>
+
+<p>一个简单地示例：</p>
+<h4>1.注册Cloudflare，注册过程很简单，不再展开讲；</h4>
+<h4>2.注册Github,并创建一个代码仓库（Repositories），仓库里的内容可以是自己的代码，也可以使用<a href="https://hexo.io/">Hexo</a>等程序；</h4>
+<h4>3. 在Cloudflare pages中关联Github 仓库：</h4>
+<p><img alt="" src="/images/imagee7fa952badcb893a.md_.png" /></p>
+<p>选择准备好的仓库，点击开始设置，</p>
+<p><img alt="" src="/images/image2eb929aa4fe6d45b.md_.png" /></p>
+<p><img alt="" src="/images/imagea513811662f5bab6.md_.png" /></p>
+<p>项目名称就是二级域名的名称，例如项目名称为example，则二级域名为：example.pages.dev 。</p>
+<p>如果项目名称重复，则cloudflare会增加唯一标识，所以提前想好一个项目名称。</p>
+<p>构建命令根据框架预设提供了示例。</p>
+<p>点击保存并部署。</p>
+<p>根据代码不同，构建的时间也不同，等待部署成功后，即可访问。</p>
+<p>更多内容可以查看官方文档：<a href="https://developers.cloudflare.com/pages/">https://developers.cloudflare.com/pages/</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+    </article>
+    </nav>
+    <footer>
+        <a href="/" class="footer-link">pigchen.github.io</a>
+    </footer>
+</body>
+</html>

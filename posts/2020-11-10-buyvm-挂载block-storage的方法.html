@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyVM 挂载Block Storage的方法 - pigchen</title>
+    <meta name="description" content="BuyVM 挂载Block Storage的方法">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif; max-width: 800px; margin: 0 auto; padding: 30px 20px; line-height: 1.8; color: #1a1a1a; background: #fafafa; }
+        header { margin-bottom: 25px; border-bottom: 2px solid #ddd; padding-bottom: 15px; }
+        h1 { font-size: 26px; color: #111; margin-bottom: 8px; }
+        .back { color: #1a56db; font-size: 14px; text-decoration: none; }
+        .back:hover { text-decoration: underline; }
+        .date { color: #555; font-size: 14px; }
+        article { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); min-height: 60vh; }
+        article img { max-width: 100%; height: auto; border-radius: 4px; margin: 10px 0; }
+        article h2 { font-size: 20px; color: #222; margin: 20px 0 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        article h3 { font-size: 17px; color: #333; margin: 15px 0 8px; }
+        article p { margin: 10px 0; }
+        article a { color: #1a56db; }
+        article pre { background: #1e293b; color: #e2e8f0; padding: 16px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.5; margin: 12px 0; }
+        article code { background: #f1f5f9; color: #0f172a; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+        article pre code { background: none; color: inherit; padding: 0; }
+        article table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+        article th, article td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        article th { background: #f8fafc; font-weight: 600; }
+        article ul, article ol { margin: 10px 0; padding-left: 24px; }
+        article li { margin: 4px 0; }
+        footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; }
+        .footer-link { color: #555; font-size: 13px; text-decoration: none; }
+        .footer-link:hover { color: #1a56db; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="back">&larr; 返回首页</a>
+        <h1>BuyVM 挂载Block Storage的方法</h1>
+        <p class="date"></p>
+    </header>
+    <nav aria-label="文章内容" role="main">
+    <article>
+<p style="color:#888;">2020-11-10</p>
+    <p>&emsp;购买完buyVm的vps和Block Storage存储块后需要手动将Block Storage挂载到vps上</p>
+<h4>1. 列出存储块的名称</h4>
+<p>ls /dev/disk/by-id/
+<a href="https://img.950527.xyz/image/NRc"><img alt="" src="/images/17bdea523cd510ea26f1eb287f0deab9.png" /></a></p>
+<p><em>scsi-0BUYVM_SLAB_VOLUME-2761</em> 就是要挂载的存储块名称。</p>
+<h4>2. 格式化存储块</h4>
+<p>mkfs.ext4 -F /dev/disk/by-id/scsi-0BUYVM_SLAB_VOLUME-2761 
+<a href="https://img.950527.xyz/image/b9s"><img alt="" src="/images/51897ff5d284b1f6fda5cf585eaef191.md_.png" /></a></p>
+<h4>3. 创建挂载文件夹</h4>
+<p>mkdir -p /mnt/pan</p>
+<h4>4. 挂载</h4>
+<div class="codehilite"><pre><span></span><code>mount -o discard,defaults /dev/disk/by-id/scsi-0BUYVM_SLAB_VOLUME-2761 /mnt/pan
+</code></pre></div>
+
+<h4>5. 查看挂载情况</h4>
+<div class="codehilite"><pre><span></span><code>df -h
+</code></pre></div>
+
+<p><img alt="" src="https://img02.sogoucdn.com/app/a/100520146/FCFEEFAE352E49BF38E4AA93DD09C3DF" /></p>
+<h4>6. 开机启动</h4>
+<p>echo '/dev/disk/by-id/scsi-0BUYVM_SLAB_VOLUME-2761 /mnt/pan ext4 defaults,nofail,discard 0 0' | sudo tee -a /etc/fstab
+每个人的存储块名称都不一样，大部分是<em>scsi-0BUYVM_SLAB_VOLUME-</em> + 四位数字的形式。</p>
+<p>如果执行完<code>ls /dev/disk/by-id/</code> 没有查询到存储块，可以去buyvm官网后台管理系统里挂载到vps上，如果挂载了还没有，就只能发工单了。</p>
+    </article>
+    </nav>
+    <footer>
+        <a href="/" class="footer-link">pigchen.github.io</a>
+    </footer>
+</body>
+</html>

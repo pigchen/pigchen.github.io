@@ -3,46 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pigchen - 与你共享美好生活</title>
+    <title>pigchen - 与你共享美好生活 | 技术博客</title>
+    <meta name="description" content="pigchen 的技术博客，记录程序员的日常折腾：Java、MySQL、Linux、Eclipse、前端等技术分享。">
+    <meta name="keywords" content="Java, MySQL, Linux, 程序员, 技术博客">
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; color: #333; }
-        h1 { border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .post { margin: 15px 0; padding: 10px; border-left: 3px solid #007bff; background: #f9f9f9; }
-        .post a { color: #007bff; text-decoration: none; font-size: 16px; }
-        .post a:hover { text-decoration: underline; }
-        .post .date { color: #888; font-size: 13px; }
-        .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; color: #888; font-size: 13px; text-align: center; }
-        .subtitle { color: #666; margin-bottom: 20px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif; max-width: 800px; margin: 0 auto; padding: 30px 20px; line-height: 1.8; color: #1a1a1a; background: #fafafa; }
+        header { margin-bottom: 30px; }
+        h1 { font-size: 28px; color: #111; border-bottom: 2px solid #ddd; padding-bottom: 12px; margin-bottom: 8px; }
+        .subtitle { color: #444; font-size: 15px; margin-bottom: 20px; }
+        .post { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 15px; border-left: 4px solid #2563eb; background: #fff; margin-bottom: 10px; border-radius: 0 6px 6px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); transition: transform 0.1s; }
+        .post:hover { transform: translateX(3px); box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        .post a { color: #1a56db; text-decoration: none; font-size: 15px; flex: 1; }
+        .post a:hover { color: #1e40af; text-decoration: underline; }
+        .post .date { color: #666; font-size: 13px; white-space: nowrap; margin-left: 15px; }
+        footer { margin-top: 40px; padding: 20px; border-top: 1px solid #ddd; color: #555; font-size: 13px; text-align: center; }
+        main { min-height: 60vh; }
     </style>
 </head>
 <body>
-    <h1>pigchen</h1>
-    <p class="subtitle">一个程序员的折腾记录与技术分享</p>
-    <div class="post"><a href="/posts/2024-09-29-java-text-messageformat-对较大整数类型的格式化问题/">java.text.MessageFormat 对较大整数类型的格式化问题</a><div class="date">2024-09-29</div></div>
-<div class="post"><a href="/posts/2022-01-23-eclipse-更换svn地址/">eclipse 更换svn地址</a><div class="date">2022-01-23</div></div>
-<div class="post"><a href="/posts/2022-01-17-查询mysql数据库中所有表/">查询mysql数据库中所有表</a><div class="date">2022-01-17</div></div>
-<div class="post"><a href="/posts/2021-11-16-mysql数据库查询带有某个字段的所有表名/">mysql数据库查询带有某个字段的所有表名</a><div class="date">2021-11-16</div></div>
-<div class="post"><a href="/posts/2021-05-18-eclipse还原默认样式颜色/">eclipse还原默认样式颜色</a><div class="date">2021-05-18</div></div>
-<div class="post"><a href="/posts/2021-05-06-debian10安装mariadb/">debian10安装mariadb</a><div class="date">2021-05-06</div></div>
-<div class="post"><a href="/posts/2021-04-18-免费建站-利用cloudflare的pages搭建网站/">免费建站：利用Cloudflare的Pages搭建网站</a><div class="date">2021-04-18</div></div>
-<div class="post"><a href="/posts/2021-03-11-25-道-mybatis-面试题/">25 道 MyBatis 面试题</a><div class="date">2021-03-11</div></div>
-<div class="post"><a href="/posts/2020-12-30-eclipse-无代码提示/">Eclipse 无代码提示</a><div class="date">2020-12-30</div></div>
-<div class="post"><a href="/posts/2020-12-25-eclipse快捷键/">Eclipse快捷键</a><div class="date">2020-12-25</div></div>
-<div class="post"><a href="/posts/2020-11-23-免费搭建博客-1-申请免费域名/">【免费搭建博客】1.申请免费域名</a><div class="date">2020-11-23</div></div>
-<div class="post"><a href="/posts/2020-11-22-debian安装-配置java环境/">debian安装、配置JAVA环境</a><div class="date">2020-11-22</div></div>
-<div class="post"><a href="/posts/2020-11-21-修改mysql的max_allowed_packet大小/">修改mysql的max_allowed_packet大小</a><div class="date">2020-11-21</div></div>
-<div class="post"><a href="/posts/2020-11-21-xml中-解析转义问题/">XML中&解析转义问题</a><div class="date">2020-11-21</div></div>
-<div class="post"><a href="/posts/2020-11-18-在不设置-div-元素的宽度-width-的情况下-如何让-div-元素居中/">在不设置 Div 元素的宽度（width）的情况下，如何让 Div 元素居中？</a><div class="date">2020-11-18</div></div>
-<div class="post"><a href="/posts/2020-11-18-traffic-monitor-windows平台的网速监控悬浮窗软件/">Traffic Monitor——Windows平台的网速监控悬浮窗软件</a><div class="date">2020-11-18</div></div>
-<div class="post"><a href="/posts/2020-11-18-chrome浏览器开启多线程加速下载/">chrome浏览器开启多线程加速下载</a><div class="date">2020-11-18</div></div>
-<div class="post"><a href="/posts/2020-11-17-windows10透明任务栏-translucenttb/">Windows10透明任务栏 TranslucentTB</a><div class="date">2020-11-17</div></div>
-<div class="post"><a href="/posts/2020-11-16-quicklook-空格键预览文件工具/">QuickLook 空格键预览文件工具</a><div class="date">2020-11-16</div></div>
-<div class="post"><a href="/posts/2020-11-12-centos7设置firewall防火墙-开放-禁用-端口/">centos7设置firewall防火墙，开放（禁用）端口</a><div class="date">2020-11-12</div></div>
-<div class="post"><a href="/posts/2020-11-11-微软-powertoys-小工具合集/">微软 PowerToys 小工具合集</a><div class="date">2020-11-11</div></div>
-<div class="post"><a href="/posts/2020-11-10-buyvm-挂载block-storage的方法/">BuyVM 挂载Block Storage的方法</a><div class="date">2020-11-10</div></div>
-<div class="post"><a href="/posts/2020-11-09-joplin是一个免费的开源笔记记录和待办事项应用程序/">Joplin是一个免费的开源笔记记录和待办事项应用程序</a><div class="date">2020-11-09</div></div>
-<div class="post"><a href="/posts/2020-11-09-css水平居中和垂直居中/">css水平居中和垂直居中</a><div class="date">2020-11-09</div></div>
-<div class="post"><a href="/posts/2020-11-08-mysql开启远程连接/">MYSQL开启远程连接</a><div class="date">2020-11-08</div></div>
-    <div class="footer"><p>&copy; 2026 pigchen | Powered by GitHub Pages</p></div>
+    <header>
+        <h1>pigchen</h1>
+        <p class="subtitle">一个程序员的折腾记录与技术分享</p>
+    </header>
+    <nav aria-label="文章导航">
+        <main>
+        <article class="post"><a href="/posts/2024-09-29-java-text-messageformat-对较大整数类型的格式化问题.html">java.text.MessageFormat 对较大整数类型的格式化问题</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2022-01-23-eclipse-更换svn地址.html">eclipse 更换svn地址</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2022-01-17-查询mysql数据库中所有表.html">查询mysql数据库中所有表</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2021-11-16-mysql数据库查询带有某个字段的所有表名.html">mysql数据库查询带有某个字段的所有表名</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2021-05-18-eclipse还原默认样式颜色.html">eclipse还原默认样式颜色</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2021-05-06-debian10安装mariadb.html">debian10安装mariadb</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2021-04-18-免费建站-利用cloudflare的pages搭建网站.html">免费建站：利用Cloudflare的Pages搭建网站</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2021-03-11-25-道-mybatis-面试题.html">25 道 MyBatis 面试题</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-12-30-eclipse-无代码提示.html">Eclipse 无代码提示</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-12-25-eclipse快捷键.html">Eclipse快捷键</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-11-23-免费搭建博客-1-申请免费域名.html">【免费搭建博客】1.申请免费域名</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-11-22-debian安装-配置java环境.html">debian安装、配置JAVA环境</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-11-21-修改mysql的max_allowed_packet大小.html">修改mysql的max_allowed_packet大小</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-11-21-xml中-解析转义问题.html">XML中&解析转义问题</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-11-18-在不设置-div-元素的宽度-width-的情况下-如何让-div-元素居中.html">在不设置 Div 元素的宽度（width）的情况下，如何让 Div 元素居中？</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-11-18-traffic-monitor-windows平台的网速监控悬浮窗软件.html">Traffic Monitor——Windows平台的网速监控悬浮窗软件</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-11-18-chrome浏览器开启多线程加速下载.html">chrome浏览器开启多线程加速下载</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-11-17-windows10透明任务栏-translucenttb.html">Windows10透明任务栏 TranslucentTB</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-11-16-quicklook-空格键预览文件工具.html">QuickLook 空格键预览文件工具</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-11-12-centos7设置firewall防火墙-开放-禁用-端口.html">centos7设置firewall防火墙，开放（禁用）端口</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-11-11-微软-powertoys-小工具合集.html">微软 PowerToys 小工具合集</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-11-10-buyvm-挂载block-storage的方法.html">BuyVM 挂载Block Storage的方法</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-11-09-joplin是一个免费的开源笔记记录和待办事项应用程序.html">Joplin是一个免费的开源笔记记录和待办事项应用程序</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-11-09-css水平居中和垂直居中.html">css水平居中和垂直居中</a><span class="date"></span></article>
+<article class="post"><a href="/posts/2020-11-08-mysql开启远程连接.html">MYSQL开启远程连接</a><span class="date"></span></article>
+        </main>
+    </nav>
+    <footer>
+        <p>&copy; 2026 pigchen | 基于 GitHub Pages</p>
+    </footer>
 </body>
 </html>
